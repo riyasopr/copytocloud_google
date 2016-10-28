@@ -5,7 +5,7 @@
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-	"start": "app.js"
+    "start": "node app.js"
   },
   "author": "Riyas",
   "license": "ISC",
@@ -15,11 +15,16 @@
     "emailjs": "^1.0.8",
     "express": "^4.14.0",
     "googleapis": "^14.1.0",
+    "jade": "^1.11.0",
     "morgan": "^1.7.0",
     "pretty-time": "^0.2.0",
     "prettysize": "0.0.3",
+    "progress-stream": "^1.2.0",
     "serve-favicon": "^2.3.0",
     "socket.io": "^1.5.1",
     "underscore": "^1.8.3"
   }
+  "engines": {
+    "node": "5.7.0"
+  },
 }
