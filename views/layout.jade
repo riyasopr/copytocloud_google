@@ -4,8 +4,15 @@ html
 		title= title
 		link(rel="stylesheet" href="bootstrap/dist/css/bootstrap.min.css")
 		link(rel='stylesheet', href='/stylesheets/style.css')
+		link(rel='stylesheet', href='/mob/css/opensans.css')
+		link(rel='stylesheet', href='/mob/css/ionicons.min.css', media='all')
+		link(rel='stylesheet', href='/mob/css/materialize.min.css')
+		link(rel='stylesheet', href='/mob/css/swiper.css')
+		link(rel='stylesheet', href='/mob/css/swipebox.min.css')
+		link(rel='stylesheet', href='/mob/css/style.css')
 		script(src="/socket.io/socket.io.js")
 	body
-		.container
-			block content
-			include footer
+		#main.m-scene
+			#content.grey-blue
+				block content
+				include footer
