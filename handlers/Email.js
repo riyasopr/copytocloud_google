@@ -19,8 +19,8 @@ function Email() {
 
     this.init = ()=> {
         this.server = email.server.connect({
-            user: "churey.veer@gmail.com",
-            password: "k@thm@ndu",
+            user: "",
+            password: "",
             host: "smtp.gmail.com",
             tls:true
         });
@@ -48,8 +48,8 @@ function Email() {
 module.exports = Email;
 //
 // mail = new Email();
-// mail.setTo("samundrak@yahoo.com");
-// mail.setFrom("samundrak@yahoo.com");
+// mail.setTo("");
+// mail.setFrom("");
 // mail.setSubject("Hello Testing");
 // mail.setMessage("A test message");
 // mail.init();
