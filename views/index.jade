@@ -2,10 +2,13 @@ extends layout
 
 block content
 	#div.alert.alert-info
-		div
-			span.glyphicon.glyphicon-bell
-			span 	If its your first time or there is problem then please
-			a.btn.btn-default(style="margin-left:10px;" href="/authenticate").glyphicon.glyphicon-user 	Authenticate
+		.swiper-container.slider
+			.swiper-wrapper(style='transition-property:none')
+				.swiper-slide
+					span.glyphicon.glyphicon-bell
+					span 	If its your first time or there is problem then please
+					br
+					a.btn.btn-default(style="margin-left:10px;" href="/authenticate").glyphicon.glyphicon-user 	Authenticate
 	#files.row
 		.col-md-12
 			ul.list-group
