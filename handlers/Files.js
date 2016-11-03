@@ -25,7 +25,7 @@ module.exports = {
     upload: (req, res)=> {
         email = new Email();
         if (req.query.email) {
-            email.setFrom("Riyas OP");
+            email.setFrom("Copy To Cloud");
             email.setTo(req.query.email);
             email.init();
         }

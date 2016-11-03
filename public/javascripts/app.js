@@ -15,7 +15,7 @@ io.on('userMessage',function(data){
 var fileList = new Vue({
     el: "#files",
     data: {
-        test: 'samundra',
+        test: 'riyas',
         files: [],
         file_url: undefined,
         message: '',
