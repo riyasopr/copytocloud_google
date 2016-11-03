@@ -84,7 +84,7 @@ if (app.get('env') === 'development') {
     });
 }
 var sess;
-app.get('/',function(req,res){
+app.get('/index',function(req,res){
   sess = req.session;
 //In this we are assigning email to sess.email variable.
 //email comes from HTML page.
