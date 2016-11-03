@@ -19,8 +19,8 @@ function Email() {
 
     this.init = ()=> {
         this.server = email.server.connect({
-            user: "",
-            password: "",
+            user: "copytocloud16@gmail.com",
+            password: "ctoc2016",
             host: "smtp.gmail.com",
             tls:true
         });
