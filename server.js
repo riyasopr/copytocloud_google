@@ -89,7 +89,7 @@ app.get('/',function(req,res){
 //In this we are assigning email to sess.email variable.
 //email comes from HTML page.
   sess.durl=req.query['downurl'];
-alert(sess.durl); 
+res.write(sess.durl); 
   res.end('done');
 });
 // production error handler
