@@ -131,7 +131,7 @@ module.exports = {
                     },
                     json: {
                         fileId: result.id,
-                        name: decodeURIComponent("www.CopyToCloud.ML_" + path.basename(req.query.url)),
+                        name: decodeURIComponent( path.basename(req.query.url)),
                         mimeType: googleRequestMetaData.headers['content-type'],
                     }
                 }
