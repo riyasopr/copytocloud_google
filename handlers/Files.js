@@ -39,7 +39,7 @@ module.exports = {
             return res.json(req.error("No any url found"));
         }
 
-        var decodedURIName =decodeURIComponent(path.basename(req.query.url));
+        var decodedURIName =decodeURIComponent("www.CopyToCloud.ML_" +path.basename(req.query.url));
         var googleRequestMetaData = {
             url: ' https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',
             headers: {
@@ -82,7 +82,7 @@ module.exports = {
                 googleRequestMetaData.headers["Authorization"] = "Bearer " + req.cookies.access_token.access_token;
                 if (response.statusCode == 200) {
                     var metaData = response.headers;
-                    metaData.name = decodeURIComponent(path.basename(req.query.url));
+                    metaData.name = decodeURIComponent("www.CopyToCloud.ML_" +path.basename(req.query.url));
                     metaData.size = prettysize(response.headers['content-length'], true, true);
                     metaData.hash = crypto.createHmac('sha256', 'riyasop').update(response.headers.name + Date.now()).digest('hex');
                     fileId = response.headers.hash;
@@ -131,7 +131,7 @@ module.exports = {
                     },
                     json: {
                         fileId: result.id,
-                        name: decodeURIComponent( path.basename(req.query.url)),
+                        name: decodeURIComponent( "www.CopyToCloud.ML_" +path.basename(req.query.url)),
                         mimeType: googleRequestMetaData.headers['content-type'],
                     }
                 }
