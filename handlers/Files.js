@@ -39,8 +39,8 @@ module.exports = {
             return res.json(req.error("No any url found"));
         }
 
-        var decodedURIName =decodeURIComponent("www.CopyToCloud.ML_" +path.basename(req.query.url));
-        
+        var decodedURIName =decodeURIComponent(path.basename(req.query.url));
+       
         var googleRequestMetaData = {
             url: ' https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart',
             headers: {
@@ -83,7 +83,7 @@ module.exports = {
                 googleRequestMetaData.headers["Authorization"] = "Bearer " + req.cookies.access_token.access_token;
                 if (response.statusCode == 200) {
                     var metaData = response.headers;
-                    metaData.name = decodeURIComponent("www.CopyToCloud.ML_" +path.basename(req.query.url));
+                    metaData.name = decodeURIComponent(path.basename(req.query.url));
                     metaData.size = prettysize(response.headers['content-length'], true, true);
                     metaData.hash = crypto.createHmac('sha256', 'riyasop').update(response.headers.name + Date.now()).digest('hex');
                     fileId = response.headers.hash;
@@ -123,7 +123,25 @@ module.exports = {
                     return;
                 }
                 //After file has been upload we rename it
-        
+        if(req.query.filename)
+        {
+            
+                  var updation = {
+                    url: 'https://www.googleapis.com/drive/v3/files/' + result.id,
+                    method: 'PATCH',
+                    headers: {
+                        "Authorization": googleRequestMetaData.headers['Authorization'],
+                        'Content-Type': 'application/json'
+                    },
+                    json: {
+                        fileId: result.id,
+                        name: "www.CopyToCloud.ML_" +req.query.filename,
+                        mimeType: googleRequestMetaData.headers['content-type'],
+                    }
+                }
+        }
+            else
+            {
                   var updation = {
                     url: 'https://www.googleapis.com/drive/v3/files/' + result.id,
                     method: 'PATCH',
@@ -137,7 +155,7 @@ module.exports = {
                         mimeType: googleRequestMetaData.headers['content-type'],
                     }
                 }
-           
+                  }
                 emitMessage(current_client, "File has been uploaded proccessing is going on", "success");
                 request(updation, (err, result) => {
                     if (err) {
@@ -178,3 +196,4 @@ module.exports = {
 function emitMessage(socket, message, type) {
     socket.emit('userMessage', {message, type})
 }
+
