@@ -1,5 +1,4 @@
 var express = require('express');
-var session = require('express-session');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
@@ -9,23 +8,20 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var api = require('./routes/Api');
 var app = express();
-
-
-app.set('port', (process.env.PORT || 8080))
-
+ 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
+ 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({secret: 'ssshhhhh'}));
-
+app.use(express.static(path.join(__dirname, 'bower_components')));
+ 
 //Some global use configuration
 app.use((req, res, next)=> {
     var google = require('googleapis');
@@ -54,24 +50,23 @@ app.use('/api', (req, res, next)=> {
     return next();
 });
 x = 101;
-var server = app.listen(app.get('port'), function() {
-  console.log("Node app is running at localhost:" + app.get('port'))
-});
+var port = process.env.port || 1337;
+var server = app.listen(process.env.PORT || 1337);
 var io = require('socket.io')(server);
 require('./handlers/Socket')(app,io);
 app.use('/', routes);
 app.use('/api', api);
 app.use('/users', users);
-
+ 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     next(err);
 });
-
+ 
 // error handlers
-
+ 
 // development error handler
 // will print stacktrace
 if (app.get('env') === 'development') {
@@ -83,15 +78,7 @@ if (app.get('env') === 'development') {
         });
     });
 }
-var sess;
-app.get('/index',function(req,res){
-  sess = req.session;
-//In this we are assigning email to sess.email variable.
-//email comes from HTML page.
-  sess.durl=req.query['downurl'];
-res.write(sess.durl); 
-  res.end('done');
-});
+ 
 // production error handler
 // no stacktraces leaked to user
 app.use(function (err, req, res, next) {
@@ -102,5 +89,5 @@ app.use(function (err, req, res, next) {
     });
 });
 //Socket Implemention
-
+ 
 module.exports = app;
